@@ -1,0 +1,154 @@
+.login-section {
+  background: url('https://www.designbolts.com/wp-content/uploads/2012/11/Dark-textured-pattern-for-backgrounds.jpg');
+  height: 100vh;
+  width: 100%;
+}
+
+.register {
+  max-width: 850px;
+  height: 75%;
+  border: 1px solid #e9ecef;
+  padding: 1.5rem;
+  background-color: #000;
+  color: #fff;
+  border-radius: 0.5rem;
+  font-family: 'Lexend', sans-serif;
+  width: 30%;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.register span {
+  color: #adb5bd;
+}
+
+.flex {
+  display: flex;
+  gap: 1em;
+}
+ 
+.flex-col {
+  flex-direction: column;
+}
+
+/* .register .sign-in {
+  font-weight: bold;
+  font-size: 1.5rem;
+} */
+
+.register .log-in-image {
+  flex-basis: 48%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: #ffdf1a;
+
+}
+
+.register .log-in-image img {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width: 860px) {
+  .register .log-in-image img {
+    display: initial;
+  }
+}
+
+.login-background {
+  width: 100%;
+  display: flex;
+  padding-top: 5%;
+}
+
+
+.App {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* ____________________________________ */
+.login {
+  border-radius: 10px;
+}
+
+/* .sign-in h1{
+  font-weight: bold;
+  font-size: 1.5rem;
+} */
+
+.login-form-content {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin-bottom: 5%;
+}
+
+.login-form-content label {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  grid-column: span 4;
+}
+
+.login-form-forgot{
+  text-align: center;
+  margin-top: 5%;
+}
+.horizontal-line{
+  border-color: #fff !important;
+}
+
+.login-form-content input {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  display: inline-block;
+  outline: none;
+  grid-column: span 8;
+  background-color: #000;
+  border-radius: 0.25rem;
+  color: #FFD700;
+
+
+  
+  ::placeholder {
+    color: #FFD700;
+    
+  }
+}
+
+.login-btn {
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  
+  border-radius: 1rem;
+  
+  border: 2px solid #FFD700;
+  
+  color: #FFD700;
+  
+  background-color: transparent;
+
+  transition: border 200ms ease 150ms, color 200ms ease 150ms, background-color 200ms ease 150ms, transform 200ms ease;
+}
+
+.login-btn:hover {
+  border-color: #000;
+  
+  color: #000;
+  
+  background-color: #FFD700;
+  
+  transform: scale(1.1);
+
+  transition-delay: 0s;
+}
+
+.login-errors {
+  color: red;
+    font-size: 14px;
+    text-align: center;
+    padding-left: 6%;
+}

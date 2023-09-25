@@ -1,0 +1,194 @@
+/* .container{
+	background: #f2f2f2;
+	width: 50%;
+	height: 85%;
+	padding-bottom: 20px;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: auto;
+  padding: 70px 50px 20px 50px;
+}
+
+.container h2 {
+    text-align: center;
+}
+.fl{
+	float: left;
+  width: 110px;
+  line-height: 35px;
+}
+
+.fontLabel{
+  color: #000;
+}
+
+.fr{
+	float: right;
+}
+
+.clr{
+	clear: both;
+}
+
+.box{
+	width: 362px;
+	height: 35px;
+	margin-top: 10px;
+	font-family: verdana;
+	font-size: 12px;
+    padding: 25px 0 10px 0;
+}
+
+.textBox{
+	height: 33px;
+	width: 190px;
+	border: none;
+  padding-left: 20px;
+}
+
+.new{
+  float: left;
+}
+
+.iconBox{
+	height: 35px;
+	width: 40px;
+	line-height: 38px;
+	text-align: center;
+  background: #ff6600;
+}
+
+.radio{
+	color: white;
+	background: #2d3e3f;
+	line-height: 38px;
+}
+
+.terms{
+	line-height: 35px;
+	text-align: center;
+	background: #2d3e3f;
+	color: white;
+}
+
+.submit{
+	float: right;
+	border: none;
+	color: white;
+	width: 110px;
+	height: 35px;
+	background: #ff6600;
+	text-transform: uppercase;
+  cursor: pointer;
+}
+
+
+
+#register-form {
+    text-align: -webkit-center;
+} */
+
+
+/*  */
+
+.register-section {
+    background: url('https://www.designbolts.com/wp-content/uploads/2012/11/Dark-textured-pattern-for-backgrounds.jpg');
+    /* height: 100vh; */
+    width: 100%;
+}
+
+.registers {
+    height: 75%;
+    border: 1px solid #e9ecef;
+    padding: 1.5rem;
+    background-color: #000;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-family: 'Lexend', sans-serif;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.register-background {
+    width: 100%;
+    display: flex;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.expense-register {
+    border-radius: 10px;
+}
+
+.reg-btn {
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    /* Adjust padding as needed */
+    border-radius: 1rem;
+    /* Adjust border radius as needed */
+    border: 2px solid #FFD700;
+    /* Replace with your desired border color */
+    color: #FFD700;
+    /* Replace with your desired text color */
+    background-color: transparent;
+    /* Transparent background */
+    transition: border 200ms ease 150ms, color 200ms ease 150ms, background-color 200ms ease 150ms, transform 200ms ease;
+  }
+  .reg-btn:hover {
+    border-color: #000;
+    /* Replace with your desired hover border color */
+    color: #000;
+    /* Replace with your desired hover text color */
+    background-color: #FFD700;
+    /* Replace with your desired hover background color */
+    transform: scale(1.1);
+    /* Scale up on hover */
+    transition-delay: 0s;
+  }
+
+  .register-form-content input {
+    padding: 0.5rem;
+    /* Adjust the padding as needed */
+    margin: 0.5rem;
+    /* Adjust the margin as needed */
+    display: inline-block;
+    outline: none;
+    grid-column: span 8;
+    /* For use within a grid */
+    background-color: #000;
+    /* Replace with your desired background color */
+    border-radius: 0.25rem;
+    /* Adjust the border radius as needed */
+    color: #FFD700;
+    /* Replace with your desired text color */
+  /* Placeholder text styling */
+  ::placeholder {
+    color: #FFD700;
+    /* Replace with your desired placeholder text color */
+  }
+  }
+
+  .register-form-content label {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    grid-column: span 4;
+  }
+
+  .register-form-content {
+    display: grid;
+    /* grid-template-columns: repeat(12, 1fr); */
+    margin-bottom: 5%;
+    width: 50%;
+  }
+
+  .register-name-section{
+    display: flex;
+  }
+
+  .errors {
+    color: red;
+    font-size: 14px;
+}
