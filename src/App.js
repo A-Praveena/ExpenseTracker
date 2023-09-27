@@ -8,8 +8,8 @@ import LandingPage from './LandingPage/LandingPage';
 import ExpenseForm from './ExpenseForm/ExpenseForm';
 import AboutUs from './about/about';
 import Contact from './Contact/contact';
-import DoughnutChart from './Components/Doughnut';
-import ExpenseCard from './Components/ExpenseCard';
+import DoughnutChart from './Components/Doughnut/Doughnut';
+import ExpenseCard from './Components/ExpenseCard/ExpenseCard';
 
 
 

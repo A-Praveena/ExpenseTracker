@@ -1,0 +1,56 @@
+.ExpenseCard-Section{
+    margin: 0.5rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    color: rgb(0, 0, 0);
+    background-color: black;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1.5rem;
+    width: 90%;
+    width: 65%;
+    display: flex;
+  
+}
+.custom-text{
+color: green;
+position: absolute;
+cursor: pointer;
+}
+.custom-style{
+display: flex;
+color: white;
+background-color: black;
+border-radius: 1rem;
+width: fit-content;
+padding: 0.25rem 0.5rem;
+margin-left: 0.75rem;
+}
+.custom-text-small{
+font-size: 0.875rem; 
+margin-left: 0.25rem; 
+}
+.custom-margin{
+margin-top: 0.25rem; 
+margin-top: 0.5rem; 
+}
+.custom-layout{
+grid-column: span 2;
+margin-left: 1.5rem; 
+margin-top: 0.5rem; 
+}
+.custom-text-2{
+font-size: 0.875rem;
+font-weight: bold; 
+}
+.custom-style-2{
+display: flex;
+font-weight: bold; 
+color: white;
+margin-top: 0.5rem; 
+margin-left: 0; 
+}
