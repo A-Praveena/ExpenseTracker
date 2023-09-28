@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
+const dotenv= require('dotenv') 
+dotenv.config();
+const username=process.env.DB_USERNAME
+const password=process.env.DB_PASSWORD
 
 
-const dbURI = `mongodb+srv://praveena9915:Pravi123@cluster0.2m0yxug.mongodb.net/Expense`
+const dbURI = `mongodb+srv://${username}:${password}@cluster0.2m0yxug.mongodb.net/Expense`
 
 
 mongoose.connect(dbURI, {
