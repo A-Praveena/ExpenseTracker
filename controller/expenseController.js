@@ -87,7 +87,7 @@ const deleteExpense = async(request,response) => {
 
         try {
             const userId = request.params.userId;
-            console.log(userId);
+            //console.log(userId);
             const Expensedata = await Expense.find({ userId: userId});
             response.status(200).json({
                 data: {
