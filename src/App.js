@@ -10,6 +10,7 @@ import AboutUs from './about/about';
 import Contact from './Contact/contact';
 import DoughnutChart from './Components/Doughnut/Doughnut';
 import ExpenseCard from './Components/ExpenseCard/ExpenseCard';
+import HomeDashboard from './HomeDashboard/Homedashboard';
 
 
 
@@ -32,6 +33,8 @@ function App() {
         <Route path="/Contact" element={<Contact/>}></Route>
         <Route path="/DoughnutChart" element={<DoughnutChart/>}></Route>
         <Route path="/ExpenseCard" element={<ExpenseCard/>}></Route>
+        <Route path="/HomeDashboard" element={<HomeDashboard/>}></Route>
+
         
       </Routes>
       </BrowserRouter>

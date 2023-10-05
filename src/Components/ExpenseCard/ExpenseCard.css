@@ -1,56 +1,145 @@
-.ExpenseCard-Section{
-    margin: 0.5rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding: 0.5rem;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    color: rgb(0, 0, 0);
+.background {
+    background: url('https://www.designbolts.com/wp-content/uploads/2012/11/Dark-textured-pattern-for-backgrounds.jpg');
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .ExpenseCard-Section{
+          margin: 0.5rem;
+          margin-top: 1rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+          padding: 0.5rem;
+          color: #fff;
+          background-color: black;
+          border-radius: 1rem;
+          padding: 1rem;
+          margin: 1.5rem;
+          display: flex;
+          justify-content: space-between;
+        
+  }
+  
+  .font-bold{
+    font-size: 1.3rem;
+  }
+  .custom-text {
+    color: #FFD700;;
+    cursor: pointer;
+    font-size: 42px;
+  }
+  .custom-style{
+    display: flex;
+    color: white;
     background-color: black;
     border-radius: 1rem;
-    padding: 1rem;
-    margin: 1.5rem;
-    width: 90%;
-    width: 65%;
-    display: flex;
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.75rem;
+  }
+  .custom-text-small{
+      font-size: 0.875rem; 
+    margin-left: 0.25rem; 
+    padding-top: 10%;
+  }
+  .custom-margin{
+      margin-top: 0.25rem; 
+    margin-top: 0.5rem; 
+  }
+  .custom-layout{
+      grid-column: span 2;
+    margin-left: 1.5rem; 
+    margin-top: 0.5rem; 
+  }
+  .custom-text-2{
+      font-size: 0.875rem;
+    font-weight: bold; 
+  }
+  .custom-style-2{
+      display: flex;
+    font-weight: bold; 
+    color: white;
+    margin-top: 0.5rem; 
+    margin-left: 0; 
+  }
   
-}
-.custom-text{
-color: green;
-position: absolute;
-cursor: pointer;
-}
-.custom-style{
-display: flex;
-color: white;
-background-color: black;
-border-radius: 1rem;
-width: fit-content;
-padding: 0.25rem 0.5rem;
-margin-left: 0.75rem;
-}
-.custom-text-small{
-font-size: 0.875rem; 
-margin-left: 0.25rem; 
-}
-.custom-margin{
-margin-top: 0.25rem; 
-margin-top: 0.5rem; 
-}
-.custom-layout{
-grid-column: span 2;
-margin-left: 1.5rem; 
-margin-top: 0.5rem; 
-}
-.custom-text-2{
-font-size: 0.875rem;
-font-weight: bold; 
-}
-.custom-style-2{
-display: flex;
-font-weight: bold; 
-color: white;
-margin-top: 0.5rem; 
-margin-left: 0; 
-}
+  .custom-bg-rounded {
+    background-color: #201e1e; /* Change this to your desired background color */
+    border-radius: 50%; /* To make it rounded */
+    width: 66.67%; /* Equivalent to lg:w-2/3 */
+    height: 3rem; /* Equivalent to h-12 */
+    position: relative;
+    top: 0.75rem; /* Equivalent to top-3 */
+    padding: 0.5rem; /* Equivalent to p-2 */
+    margin-bottom: 2rem; /* Equivalent to mb-8 */
+    margin-bottom: 0.75rem; /* Equivalent to lg:mb-3 */
+    width: fit-content; /* Width based on content */
+  }
+  
+  .custom-bg-rounded img {
+    /* width: 2.75rem;
+      height: 2.75rem;
+      margin-top: 0.25rem;
+      background-color: #282626;
+      border-radius: 50%;
+      padding: 3% 4% 1% 4%; */
+      height: 1.75rem; 
+      width: 1.75rem;
+      margin-top: 0.25rem;
+  }
+  .custom-grid {
+    grid-column: span 4; 
+    margin-left: 0.75rem; 
+    margin-top: 0.5rem;
+  }
+  
+  /* Media query for large screens */
+  @media (min-width: 1024px) {
+    .custom-grid {
+      grid-column: span 4; /* Override for large screens */
+      margin-left: 0; /* Override for large screens */
+      margin-top: 0.5rem; /* Override for large screens */
+    }
+  }
+  
+  .custom-flex {
+    display: flex; /* Equivalent to flex */
+    color: #FFD700; /* Equivalent to text-jp-yellow */
+    background-color: #000; /* Equivalent to bg-jp-black */
+    border-radius: 0.75rem; /* Equivalent to rounded-xl */
+    width: fit-content; /* Equivalent to w-fit */
+  }
+  
+  .custom-flex svg{
+    width: 1.25rem; /* Equivalent to w-5 */
+    height: 1.25rem; /* Equivalent to h-5 */
+  }
+  
+  .custom-flex p {
+    font-size: 0.875rem; /* Equivalent to text-sm */
+    margin-left: 0.25rem; /* Equivalent to ml-1 */
+  }
+  
+  .custom-bg {
+    display: flex;
+    align-items: center; /* Align content vertically */
+    background-color: #201e1e; /* Replace with your desired background color */
+    color:white; /* Replace with your desired text color */
+    border-radius: 1rem; /* Adjust border-radius as needed */
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    margin-left: 0.75rem; /* Adjust margin-left as needed */
+    height: 30px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  
+  }
+  
+  .spend-analysis-section{
+    color: #fff;
+    background-color: black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin: 1.5rem;
+    display: flex;
+    justify-content: center;
+  }
