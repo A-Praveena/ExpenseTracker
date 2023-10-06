@@ -18,19 +18,19 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json())
 
 app.post('/register',User.userRegister)
-app.post('/login',User.userLogin)
-app.delete('/delete/:id',User.userDelete)
+app.post('/tokens',User.userLogin)
+app.delete('/users/:id',User.userDelete)
 
 
 // -------------------------------------------------------------------------------------------
 
-app.post('/expense/add/:userId',Expense.addExpense)
-app.delete('/expense/delete/:_id',Expense.deleteExpense)
-app.put('/expense/update/:_id',Expense.updateExpense)
-app.get('/expense/display/:userId',Expense.displayExpense)
+app.post('/expenses/:userId',Expense.addExpense)
+app.delete('/expenses/:_id',Expense.deleteExpense)
+app.put('/expenses/:_id',Expense.updateExpense)
+app.get('/expenses/:userId',Expense.displayExpense)
 
 
 const port = 3005
-app.listen(port, () => {
+app.listen(port, () => { 
        console.log(`Example app listening on port ${port}`)
      })
