@@ -1,0 +1,157 @@
+.container {
+    width: 1200px !important;
+    padding: 0 !important;
+    margin-right: auto;
+    margin-left: auto;
+  
+    @media screen and (min-width: 992px) and (max-width: 1439px) {
+      max-width: 1279px !important;
+      padding: 0 !important;
+      margin: 0 80px !important;
+      width: auto !important;
+    }
+  
+    @media screen and (max-width: 991px) {
+      max-width: 959px !important;
+      margin: 0 16px !important;
+      padding: 0 !important;
+      width: auto !important;
+    }
+  }
+  
+  .gradient-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 30px;
+    @media screen and (max-width: 991px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .container-title {
+    text-align: center;
+    padding: 0 !important;
+    margin-bottom: 40px;
+    font-size: 40px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 60px;
+  }
+  
+  .card {
+    max-width: 550px;
+    border: 0;
+    width: 100%;
+    margin-inline: auto;
+    background: url(https://www.designbolts.com/wp-content/uploads/2012/11/Dark-textured-pattern-for-backgrounds.jpg);
+  }
+  
+  .container-card {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(71deg, #080509, #1a171c, #080509);
+    background-clip: padding-box;
+    border-radius: 45px;
+    padding: 20px;
+    display: flex;
+    gap: 2%;
+    img {
+      margin-bottom: 32px;
+    }
+  }
+  
+  .bg-green-box,
+  .bg-white-box,
+  .bg-yellow-box,
+  .bg-blue-box {
+    position: relative;
+  }
+  
+  .bg-green-box::after,
+  .bg-white-box::after,
+  .bg-yellow-box::after,
+  .bg-blue-box::after {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+    content: "";
+    z-index: -1;
+    border-radius: 45px;
+  }
+  
+  .bg-green-box::after {
+    background: linear-gradient(71deg, #0d1212, #3da077, #0d1212);
+  }
+  
+  .bg-white-box::after {
+    background: linear-gradient(71deg, #121013, #b0afb0, #121013);
+  }
+  
+  .bg-yellow-box::after {
+    background: linear-gradient(71deg, #110e0e, #afa220, #110e0e);
+  }
+  
+  .bg-blue-box::after {
+    background: linear-gradient(71deg, #0c0a0e, #5f6fad, #0c0a0e);
+  }
+  
+  .card-title {
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.02em;
+    line-height: 40px;
+    font-style: normal;
+    font-size: 28px;
+    padding-bottom: 8px;
+  }
+  
+  .card-description {
+    font-weight: 600;
+    line-height: 32px;
+    color: hsla(0, 0%, 100%, 0.5);
+    font-size: 16px;
+    max-width: 470px;
+  }
+  
+  .add-income{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding-top: 8%;
+  }
+
+  .expense-form-contents {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    margin-bottom: 5%;
+}
+  .expense-form-contents span {
+    /* padding: 0.5rem; */
+    /* margin: 0.5rem; */
+    display: inline-block;
+    outline: none;
+    grid-column: span 8;
+    /* background-color: #000; */
+    border-radius: 0.25rem;
+    color: #FFD700;
+}
+
+.expense-form-contents input {
+  padding: 0.5rem;
+  /* margin: 0.5rem; */
+  margin-bottom: 10%;
+  display: inline-block;
+  outline: none;
+  grid-column: span 8;
+  background-color: #000;
+  border-radius: 0.25rem;
+  color: #FFD700;
+}
+.expense-form-contents label {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  grid-column: span 4;
+}

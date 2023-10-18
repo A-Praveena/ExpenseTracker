@@ -3,19 +3,23 @@ import axios from 'axios';
 import { CCard, CCardBody } from '@coreui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { AiOutlineDelete } from "react-icons/ai";
 import money from '../../assets/money.png';
 import '../ExpenseCard/ExpenseCard.css';
+import Swal from 'sweetalert2';
+import { icon, text } from '@fortawesome/fontawesome-svg-core';
 const userId = localStorage.getItem("userId");
 
+
 export default function ExpenseCard() {
-  const [expense, setExpense] = useState(null); // Initialize to null
+  const [expense, setExpense] = useState([]);// Initialize to null
 
   const [error, setError] = useState(null); // Initialize error state
 
   useEffect(() => {
-    axios.get(`http://localhost:3005/expense/display/${userId}`)
+    axios.get(`http://localhost:3005/expenses/${userId}`)
       .then((response) => {
-        console.log(response.data.data.data);
+        // console.log("AAAAAAAAAAAAAAAA",response.data.data.data);
         setExpense(response.data.data.data);
       })
       .catch((error) => {
@@ -23,6 +27,28 @@ export default function ExpenseCard() {
         setError(error.message); // Set the error state
       });
   }, [userId]);
+
+  const handleDelete = (itemId) => {
+    axios.delete(`http://localhost:3005/expenses/${itemId}`)
+      .then((response) => {
+        // console.log(response.status);
+        // console.log(response.data);
+        if(response.status = 200){
+          Swal.fire({
+            text: 'Deleted Successfully',
+          }
+          )
+          setExpense(prevExpense => prevExpense.filter(item => item._id !== itemId));
+       
+         
+        }
+        // setExpense(response);
+      })
+      .catch((error) => {
+        console.error(error);
+        // setError(error.message); // Set the error state
+      });
+  };
 
   // Render loading state if expense is null
   if (expense === null) {
@@ -56,6 +82,7 @@ export default function ExpenseCard() {
  
          return (
         <div  key={index} className="ExpenseCard-Section">
+          <div className="ExpenseCard-head">
           <div className="custom-bg-rounded">
             <img src={money}></img>
           </div>
@@ -92,6 +119,11 @@ export default function ExpenseCard() {
               <h1 className="ml-1">{item.amount}</h1>
             </div>
           </div>
+          <div className='expense-delete-icon'  onClick={() => handleDelete(item._id)}>
+            <AiOutlineDelete/>
+          </div>
+         
+        </div>
         </div>
          );
          })}

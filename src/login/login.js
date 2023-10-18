@@ -11,13 +11,13 @@ export default function Login() {
 
 
     const submission = data => {
-        console.log("data", data);
+        // console.log("data", data);
         const userData = {
             username: data.username,
             password: data.password
         }
         // console.log(userData)
-        axios.post("http://localhost:3005/login", userData)
+        axios.post("http://localhost:3005/tokens", userData)
             .then(async (response) => {
                 // console.log("Succesfully logged in",response)
                 // console.log("Response received from the backend:", response.data); // Add this line
@@ -33,7 +33,7 @@ export default function Login() {
                 // Store the user ID in local storage
                 localStorage.setItem('userId', userId);
 
-                console.log("local storage User_id",userId)
+                // console.log("local storage User_id",userId)
                     window.location.href = '/Dashboard/${userId}';
                     // localStorage.setItem('auth', JSON.stringify(true))
                     // auth = true

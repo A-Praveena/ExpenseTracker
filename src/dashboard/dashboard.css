@@ -48,6 +48,7 @@
     font-size: 20px;
     font-weight: bold;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .menu-link:hover {
@@ -69,6 +70,8 @@
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.3s;
+    width: 65%;
+
 }
 
 .add-expense:hover, .logout:hover {

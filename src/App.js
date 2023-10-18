@@ -11,6 +11,8 @@ import Contact from './Contact/contact';
 import DoughnutChart from './Components/Doughnut/Doughnut';
 import ExpenseCard from './Components/ExpenseCard/ExpenseCard';
 import HomeDashboard from './HomeDashboard/Homedashboard';
+import AddIncome from './addincome/addincome';
+import StackedAreas from './Components/StackedAreas/stackedAreas'
 
 
 
@@ -34,6 +36,8 @@ function App() {
         <Route path="/DoughnutChart" element={<DoughnutChart/>}></Route>
         <Route path="/ExpenseCard" element={<ExpenseCard/>}></Route>
         <Route path="/HomeDashboard" element={<HomeDashboard/>}></Route>
+        <Route path="/AddIncome/:userId" element={<AddIncome/>}></Route>
+        <Route path='/StackedAreas' element={<StackedAreas/>}></Route>
 
         
       </Routes>

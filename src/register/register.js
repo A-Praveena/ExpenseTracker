@@ -11,7 +11,7 @@ export default function Register() {
 
 
     const submission = data => {
-        console.log(data);
+        // console.log(data);
         const userData = {
             firstname: data.firstname,
             lastname: data.lastname,
@@ -22,8 +22,8 @@ export default function Register() {
         }
         axios.post("http://localhost:3005/register", userData)
             .then(async (response) => {
-                console.log("User registerd successfully");
-                console.log("response1", response.data)
+                // console.log("User registerd successfully");
+                // console.log("response1", response.data)
 
                 if (response.data.status === true) {
                     localStorage.setItem('auth', JSON.stringify(true))
@@ -38,7 +38,7 @@ export default function Register() {
 
             })
             .catch(async (err) => {
-                console.log("error", err.response.data.message);
+                // console.log("error", err.response.data.message);
                 // auth = false
                 localStorage.setItem('auth', JSON.stringify(false))
 
