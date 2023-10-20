@@ -21,6 +21,8 @@ app.use(bodyParser.json())
 app.post('/register',User.userRegister)
 app.post('/tokens',User.userLogin)
 app.delete('/users/:id',User.userDelete)
+app.put('/users/:id',User.updateUserProfile)
+
 
 
 // -------------------------------------------------------------------------------------------
@@ -38,7 +40,7 @@ app.post('/users/:userId/income',incomes.addIncome)
 app.get('/users/:userId/income',incomes.displayIncome)
 
 
-const port = 3005
+const port = 3005;
 app.listen(port, () => { 
        console.log(`Example app listening on port ${port}`)
        console.log("Running");

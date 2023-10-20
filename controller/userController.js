@@ -66,7 +66,9 @@ const userLogin = async (request, response) => {
 }
 
 
-const userDelete =('/:id', async (req, res) => {
+const userDelete = async (req, res) => {
+    console.log("inside delete user")
+    
   try {
     const userId = req.params.id;
     const deletedUser = await User.findByIdAndDelete(userId);
@@ -79,8 +81,39 @@ const userDelete =('/:id', async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
-});
+};
+
+const updateUserProfile = async (request, response) => {
+    console.log("inside update user")
+    try {
+      const userId = request.params.id; // Assuming you pass the user ID in the URL params
+      const updatedUserData = {
+        firstname: request.body.firstname,
+        lastname: request.body.lastname,
+        email: request.body.email,
+        phone: request.body.phone,
+      };
+      console.log("updateuser data is",updatedUserData)
+      const updatedUser = await User.findByIdAndUpdate(userId, {$set: request.body})
+  
+      if (!updatedUser) {
+        return response.status(404).json({ message: 'User not found' });
+      }
+  
+      response.status(200).json({
+        message: 'User profile updated successfully',
+        status: true
+    
+      });
+    } catch (error) {
+      console.error(error);
+      response.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+  
+  
 
 module.exports.userDelete = userDelete;
 module.exports.userRegister = userRegister;
 module.exports.userLogin =userLogin;
+module.exports.updateUserProfile = updateUserProfile;
