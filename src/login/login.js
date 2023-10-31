@@ -96,6 +96,7 @@ export default function Login() {
                                     <button className='login-btn' >Submit</button>
                                     <div className="login-form-forgot">
                                     {/* <span>Forgot password?</span> */}
+                                    
                                     <div>
                                         <span>Don't have an account, <span><Link to="/Register" style={{ color: "#ffdf1a" }} >Sign Up</Link></span></span>
                                     </div>

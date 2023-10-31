@@ -1,0 +1,99 @@
+.editprofile {
+    height: 75%;
+    border: 1px solid #e9ecef;
+    padding: 1.5rem;
+    background-color: #000;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-family: 'Lexend', sans-serif;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.profile-background {
+    width: 100%;
+    display: flex;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.profile-edit {
+    border-radius: 10px;
+}
+  
+.edit-btn, .save-btn,  .cancel-btn {
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    /* Adjust padding as needed */
+    border-radius: 1rem;
+    /* Adjust border radius as needed */
+    border: 2px solid #FFD700;
+    /* Replace with your desired border color */
+    color: #FFD700;
+    /* Replace with your desired text color */
+    background-color: transparent;
+    /* Transparent background */
+    transition: border 200ms ease 150ms, color 200ms ease 150ms, background-color 200ms ease 150ms, transform 200ms ease;
+  }
+
+  .edit-btn:hover, .save-btn:hover,  .cancel-btn:hover {
+    border-color: #000;
+    /* Replace with your desired hover border color */
+    color: #000;
+    /* Replace with your desired hover text color */
+    background-color: #FFD700;
+    /* Replace with your desired hover background color */
+    transform: scale(1.1);
+    /* Scale up on hover */
+    transition-delay: 0s;
+  }
+
+  .edit-profile-form-content label{
+    flex: 50%;
+  }
+  .edit-profile-form-content span{
+    flex: 50%;
+  }
+  .edit-profile-content input {
+    flex: 50%;
+    padding: 0.5rem;
+    /* Adjust the padding as needed */
+    margin: 0.5rem;
+    /* Adjust the margin as needed */
+    display: inline-block;
+    outline: none;
+    grid-column: span 8;
+    /* For use within a grid */
+    background-color: #000;
+    /* Replace with your desired background color */
+    border-radius: 0.25rem;
+    /* Adjust the border radius as needed */
+    color: #FFD700;
+    /* Replace with your desired text color */
+  /* Placeholder text styling */
+  ::placeholder {
+    color: #FFD700;
+    /* Replace with your desired placeholder text color */
+  }
+  }
+
+ 
+  .edit-profile-form-content{
+    display: flex;
+    margin-bottom: 15%;
+  }
+
+  .edit-profile-name-section{
+    display: flex;
+  }
+
+  .errors {
+    color: red;
+    font-size: 14px;
+}
+
+.edit-profile-buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10%;
+}

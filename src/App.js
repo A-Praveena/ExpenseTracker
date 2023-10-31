@@ -13,6 +13,9 @@ import ExpenseCard from './Components/ExpenseCard/ExpenseCard';
 import HomeDashboard from './HomeDashboard/Homedashboard';
 import AddIncome from './addincome/addincome';
 import StackedAreas from './Components/StackedAreas/stackedAreas'
+import Profile from './Profile/profile';
+import EditProfile from './editProfile/editProfile';
+import Daily from './Components/Daily/Daily';
 
 
 
@@ -38,6 +41,9 @@ function App() {
         <Route path="/HomeDashboard" element={<HomeDashboard/>}></Route>
         <Route path="/AddIncome/:userId" element={<AddIncome/>}></Route>
         <Route path='/StackedAreas' element={<StackedAreas/>}></Route>
+        <Route path='/Profile' element={<Profile/>}></Route>
+        <Route path='/EditProfile:userId' element={<EditProfile/>}></Route>
+        <Route path='/Daily:userId' element={<Daily/>}></Route>
 
         
       </Routes>

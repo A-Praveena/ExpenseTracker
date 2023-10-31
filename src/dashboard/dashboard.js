@@ -5,18 +5,27 @@ import { useState } from "react";
 import ExpenseForm from "../ExpenseForm/ExpenseForm";
 import HomeDashboard from "../HomeDashboard/Homedashboard";
 import AddIncome from "../addincome/addincome";
+import EditProfile from "../editProfile/editProfile";
+import Daily from "../Components/Daily/Daily";
 
 export default function Dashboard() {
 
     const [showExpenseForm, setShowExpenseForm] = useState(false);
     const [showHomeDashboard, setShowHomeDashboard] = useState(true);
     const [showIncomeForm, setshowIncomeForm] = useState(false);
+    const [showEditProfileForm,setshowEditProfileForm] = useState(false);
+    const [showDailyForm,setshowDailyForm] = useState(false);
+    const [isActive, setIsActive] = useState(false);
 
+    const handleDropdownClick = () => {
+      setIsActive(!isActive);
+    };
     const userId = localStorage.getItem("userId")
     const toggleExpenseForm = () => {
         setShowExpenseForm(!showExpenseForm);
         setShowHomeDashboard(false); // Hide HomeDashboard when ExpenseForm is visible
         setshowIncomeForm(false);
+        setshowEditProfileForm(false);
     };
 
 
@@ -24,12 +33,42 @@ export default function Dashboard() {
         setShowHomeDashboard(true); // Show HomeDashboard when Home button is clicked
         setShowExpenseForm(false); // Hide ExpenseForm when HomeDashboard is visible
         setshowIncomeForm(false);
+        setshowEditProfileForm(false);
     };
+
+    const toggleEditProfile = () => {
+        setshowEditProfileForm(true);
+        setShowHomeDashboard(false); 
+        setshowIncomeForm(false);
+        setShowExpenseForm(false);
+        setshowDailyForm(false);
+
+    }
 
     const toggleIncomeForm = () => {
         setshowIncomeForm(!showIncomeForm);
         setShowExpenseForm(false);
         setShowHomeDashboard(false);
+        setshowEditProfileForm(false);
+        setshowDailyForm(false);
+
+    };
+
+    const toggleProfileForm = () => {
+        setShowHomeDashboard(true); // Show HomeDashboard when Home button is clicked
+        setShowExpenseForm(false); // Hide ExpenseForm when HomeDashboard is visible
+        setshowIncomeForm(false);
+        setshowEditProfileForm(false);
+        setshowDailyForm(false);
+    };
+
+    const toggleDailyForm = () => {
+        setshowDailyForm(true);
+        setShowHomeDashboard(false); // Show HomeDashboard when Home button is clicked
+        setShowExpenseForm(false); // Hide ExpenseForm when HomeDashboard is visible
+        setshowIncomeForm(false);
+        setshowEditProfileForm(false);
+        
     };
 
     return (
@@ -81,35 +120,39 @@ export default function Dashboard() {
                                             clipRule="evenodd"
                                         />
                                     </svg>
-                                    <a href="/dashboard/daily" class="menu-link">Daily</a>
-                                </li>
-                                <li className="menu-item">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="h-7 w-7 text-yellow-500" // Set the text color to yellow
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                        width="30"
-                                        height="30"
-                                    >
-                                        {/* User Profile Icon with Yellow Color */}
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M10 2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM10 0a4 4 0 100 8 4 4 0 000-8zM2 18a1 1 0 011-1h14a1 1 0 011 1v1H2v-1z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                    <a href="/dashboard" className="menu-link">Profile</a>
+                                    <a onClick={toggleDailyForm} class="menu-link">Daily</a>
                                 </li>
 
+                                <ul class="menu-list">
+                                    <li class="menu-item" onclick="toggleProfileForm()">
+                                        
+                                        <div >
+                                        <div className="dropdown-container">
+                                            
+                                            <svg class="h-7 w-7 text-yellow-500" viewBox="0 0 20 20" fill="currentColor" width="30" height="30">
+                                                <path fill-rule="evenodd" d="M10 2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM10 0a4 4 0 100 8 4 4 0 000-8zM2 18a1 1 0 011-1h14a1 1 0 011 1v1H2v-1z" clip-rule="evenodd" />
+                                            </svg>
+                                            <button className={`profile-btn ${isActive ? 'active' : ''}`} onClick={handleDropdownClick}>
+                                                Profile
+                                            </button>
+                                            {isActive && (
+                                                <div className="profile-contents">
+                                                <a onClick={toggleEditProfile}>Edit profile</a>
+                                                <a>Change Password</a>
+                                                </div>
+                                            )}
+                                        </div>
+                                        </div>
+                                            
+                                    </li>
+                                </ul>
+                                </ul>
 
-
-                            </ul>
                         </div>
 
 
 
-                        <div style={{ marginTop: "140%" }}>
+                        <div style={{ marginTop: "100%" }}>
                             <div class="button-container">
                                 <button class="add-expense" onClick={toggleIncomeForm}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
@@ -146,100 +189,11 @@ export default function Dashboard() {
                         {showHomeDashboard && <HomeDashboard />}
                         {showExpenseForm && <ExpenseForm userId={userId} />}
                         {showIncomeForm && <AddIncome userId={userId} />}
+                        {showEditProfileForm && <EditProfile userId={userId}/>}
+                        {showDailyForm && <Daily userId ={userId}/>}
                     </div>
                 </div>
             </div>
-
-
-            {/* <div class="sidebar">
-                <div class="sidebar-contents">
-                    <div class="custom-styles">
-                        <ul className="cursor-pointer">
-                            <li>
-                                <h1>Expense Tracker</h1>
-                            </li>
-                        </ul>
-                        <div className=" bg-rp-black ">
-                            <ul className="">
-                                <Link to="/dashboard">
-                                    <li>
-                                        <span className="mx-4">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-8 w-8"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                                            </svg>
-                                        </span>
-                                        Home
-                                    </li>
-                                </Link>
-                                <Link to="/">
-                                    <li>
-                                        <span className="mx-4">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-8 w-8"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-                                            </svg>
-                                        </span>
-                                        Analysis
-                                    </li>
-                                </Link>
-                                <Link to="/dashboard/daily">
-                                    <li>
-                                        <span className="mx-4">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-8 w-8 "
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 5a1 1 0 100 2h1a2 2 0 011.732 1H7a1 1 0 100 2h2.732A2 2 0 018 11H7a1 1 0 00-.707 1.707l3 3a1 1 0 001.414-1.414l-1.483-1.484A4.008 4.008 0 0011.874 10H13a1 1 0 100-2h-1.126a3.976 3.976 0 00-.41-1H13a1 1 0 100-2H7z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </span>
-                                        Daily
-                                    </li>
-                                </Link>
-                                <div className="ml-6  mt-4 bottom-5 left-16 pb-6 ">
-                                    <button
-                                        //   onClick={handleLogOut}
-                                        className="bg-mj-yellow px-4 py-3 flex rounded-md font-bold duration-300 ease-out hover:scale-110"
-                                    >
-                                        <span>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-6 w-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                                strokeWidth={2}
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                                                />
-                                            </svg>
-                                        </span>
-                                        Logout
-                                    </button>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div> */}
         </div>
     )
 }

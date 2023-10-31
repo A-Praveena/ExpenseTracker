@@ -95,4 +95,30 @@
     margin-bottom: 20px;
 }
 
+.profile-btn{
+    color: #FFD700;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border: 0;
+    background-color: #000;
+}
 
+.profile-btn .active{
+    border: 0;
+}
+
+.profile-contents{
+    display: grid;
+    padding-left: 8px;
+    text-decoration: none;
+    margin-left: 13%;
+    gap: 10%;
+    padding-top: 2%;
+}
+.profile-contents a{
+    text-decoration: none;
+    color: #FFD700;
+}

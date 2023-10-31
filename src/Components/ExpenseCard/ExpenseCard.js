@@ -7,14 +7,27 @@ import { AiOutlineDelete } from "react-icons/ai";
 import money from '../../assets/money.png';
 import '../ExpenseCard/ExpenseCard.css';
 import Swal from 'sweetalert2';
+import { AiFillEdit } from "react-icons/ai";
 import { icon, text } from '@fortawesome/fontawesome-svg-core';
 const userId = localStorage.getItem("userId");
 
 
 export default function ExpenseCard() {
   const [expense, setExpense] = useState([]);// Initialize to null
-
   const [error, setError] = useState(null); // Initialize error state
+
+  const [selectedExpense, setSelectedExpense] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleEdit = (item) => {
+    setSelectedExpense(item);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedExpense(null);
+  };
 
   useEffect(() => {
     axios.get(`http://localhost:3005/expenses/${userId}`)
@@ -59,6 +72,14 @@ export default function ExpenseCard() {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const saveChanges = () => {
+    // Here you can add your logic to update the expense details on the server
+    // You can use axios.put or axios.patch to send a request to update the selectedExpense object
+    // Example: axios.put(`http://localhost:3005/expenses/${selectedExpense._id}`, selectedExpense)
+    // After successful update, you can close the modal
+    setIsModalOpen(false);
+  };
 
   return (
 
@@ -122,11 +143,29 @@ export default function ExpenseCard() {
           <div className='expense-delete-icon'  onClick={() => handleDelete(item._id)}>
             <AiOutlineDelete/>
           </div>
-         
+          <div className='expense-edit-icon' onClick={() => handleEdit(item._id)}>
+          <AiFillEdit/>
+          </div>
         </div>
         </div>
          );
          })}
+         {/* Edit Expense Modal */}
+      {isModalOpen && selectedExpense && (
+        <div className="modal">
+          <div className="modal-content">
+            {/* Add input fields for editing */}
+            <input
+              type="text"
+              value={selectedExpense.categories}
+              onChange={(e) => setSelectedExpense({ ...selectedExpense, categories: e.target.value })}
+            />
+            {/* Add more input fields for other properties like share, notes, etc. */}
+            <button onClick={saveChanges}>Save</button>
+            <button onClick={() => setIsModalOpen(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );
