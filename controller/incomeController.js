@@ -1,18 +1,20 @@
 const { response } = require('express');
 const Income = require('../model/incomeSchema');
+const { DateTime } = require('luxon');
 
 const addIncome = async (request, response) => {
     try {
         const userId=request.params.userId;
-        console.log(request.body);
         // const {  amount, notes,date, categories } = request.body;
         const income = request.body.income;
-        const date = request.body.date;
-        console.log("data",userId,income,date);
+        const incomedate = DateTime.fromISO(request.body.date, { zone: 'Asia/Kolkata' }).toJSDate();
+        // Adjust the date with the timezone offset
+        const offsetInMinutes = incomedate.getTimezoneOffset();
+        incomedate.setMinutes(incomedate.getMinutes() - offsetInMinutes);
         const incomeEntry = new Income({
             userId,
             income,
-            date
+            createdAt:incomedate
         });
         const incomeDetails = await incomeEntry.save();
 

@@ -21,7 +21,10 @@ app.use(bodyParser.json())
 app.post('/register',User.userRegister)
 app.post('/tokens',User.userLogin)
 app.delete('/users/:id',User.userDelete)
+app.get('/users/:id',User.displayUser)
 app.put('/users/:id',User.updateUserProfile)
+app.put('/user/changepassword/:id',User.changePassword)
+app.post('/resetPassword', User.restPassword)
 
 
 
