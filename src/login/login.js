@@ -22,18 +22,22 @@ export default function Login() {
                 // console.log("Succesfully logged in",response)
                 // console.log("Response received from the backend:", response.data); // Add this line
                 // console.log("response message", response.data.message);
-                // console.log("response data", response.data.user);
+                // console.log("response data", response.data.user.username);
                 // console.log("response data", response.data.status);
 
 
                 if (response.data.status === true) {
-                     // Assuming your backend sends the user ID as response.data.user.id
-                const userId = response.data.user.id;
 
-                // Store the user ID in local storage
-                localStorage.setItem('userId', userId);
+                    const userId = response.data.user.id;
+                    const userName = response.data.user.username;
 
-                // console.log("local storage User_id",userId)
+
+                    // Store the user ID in local storage
+                    localStorage.setItem('userId', userId);
+                    localStorage.setItem("userName", userName);
+
+
+                    // console.log("local storage User_id",userId)
                     window.location.href = '/Dashboard/${userId}';
                     // localStorage.setItem('auth', JSON.stringify(true))
                     // auth = true
@@ -59,7 +63,7 @@ export default function Login() {
         <div>
             <div className="Nav-bar">
                 <div className="Expense-head">
-                    <h1><Link to="/" style={{textDecoration:"none",color:"#FFA500"}}> Expense Tracker</Link></h1>
+                    <h1><Link to="/" style={{ textDecoration: "none", color: "#FFA500" }}> Expense Tracker</Link></h1>
                 </div>
 
             </div>
@@ -80,8 +84,8 @@ export default function Login() {
                                         </div> */}
                                     </div>
                                     <div className='login-errors'>
-                                            {errors.username?.type === "required" && "*Username is required"}
-                                        </div>
+                                        {errors.username?.type === "required" && "*Username is required"}
+                                    </div>
                                     <div className="login-form-content">
                                         <label>Password</label>
                                         <input type="password" {...register("password", { required: true })} placeholder='Password' />
@@ -90,16 +94,16 @@ export default function Login() {
                                         </div> */}
                                     </div>
                                     <div className='login-errors'>
-                                            {errors.password?.type === "required" && "*Password is required"}
-                                        </div>
-                                    
+                                        {errors.password?.type === "required" && "*Password is required"}
+                                    </div>
+
                                     <button className='login-btn' >Submit</button>
                                     <div className="login-form-forgot">
-                                    {/* <span>Forgot password?</span> */}
-                                    
-                                    <div>
-                                        <span>Don't have an account, <span><Link to="/Register" style={{ color: "#ffdf1a" }} >Sign Up</Link></span></span>
-                                    </div>
+                                        {/* <span>Forgot password?</span> */}
+
+                                        <div>
+                                            <span>Don't have an account, <span><Link to="/Register" style={{ color: "#ffdf1a" }} >Sign Up</Link></span></span>
+                                        </div>
                                     </div>
                                 </form>
                             </div>

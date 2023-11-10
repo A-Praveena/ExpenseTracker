@@ -14,12 +14,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function DoughnutChart() {
 
 
-  const [expense, setExpense] = useState(null); // Initialize to null
+  const [expense, setExpense] = useState(null);
 
-  const [error, setError] = useState(null); // Initialize error state
-  const [totalAmountLast7Days, setTotalAmountLast7Days] = useState(null);
-  // const [startDate, setStartDate] =useState(null);
-  // const [endDate,setEndDate]  = useState(null);
+  const [error, setError] = useState(null);
+  const [totalExpense, setTotalExpense] = useState(null);
+
   const [percentageUsed, setPercentageUsed] = useState(null);
 
 
@@ -31,41 +30,37 @@ export default function DoughnutChart() {
   const [endDate, setEndDate] = useState(today.toISOString());
 
   useEffect(() => {
+    const budget = 5000; // Replace this with your predefined budget value
     axios.get(`http://localhost:3005/expenses/${userId}`)
       .then((response) => {
-        console.log(response.data.data.data);
+        console.log("Doughnut;;;;;",response.data.data.data);
         setExpense(response.data.data.data);
-        const expenses = response.data.data.data;
-        if (expenses && expenses.length > 0) {
-          // Filter expenses for the last 7 days
-          const expensesLast7Days = expenses.filter(expense => {
-            const expenseDate = new Date(expense.createdAt);
-            return expenseDate >= lastSevenDays;
-          });
+       
+        const currentDate = new Date();
+      // Calculate the date 7 days ago
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(currentDate.getDate() - 7);
+       // Filter the expenses for the last 7 days
+       const expensesLast7Days = response.data.data.data.filter((expense) => {
+        const expenseDate = new Date(expense.createdAt);
+        return expenseDate >= sevenDaysAgo && expenseDate <= currentDate;
+      });
 
-          // Calculate total amount for the last 7 days
-          const totalAmountLast7Days = expensesLast7Days.reduce((total, expense) => total + expense.amount, 0);
+      console.log("Expenses for the last 7 days:", expensesLast7Days);
+      setExpense(expensesLast7Days);
 
-          // Calculate percentage of budget used (assuming you have a budget variable)
-          const budget = 1000; // Replace this with your actual budget value
-          const percentageUsed = Math.floor((totalAmountLast7Days / budget) * 100);
+      // Calculate total expense for the last 7 days
+      const totalExpenseLast7Days = expensesLast7Days.reduce((total, expense) => {
+        return total + expense.amount;
+      }, 0);
 
-          // Update state or perform any other action with the calculated values
-          setExpense(expensesLast7Days);
-          setTotalAmountLast7Days(totalAmountLast7Days);
-          setStartDate(startDate);
-          setEndDate(endDate);
-          setPercentageUsed(percentageUsed);
-          //  console.log("setExpense",expense);
-          //  console.log("totalAmountLast7Days",totalAmountLast7Days);
-          //  console.log("percentageUsed",percentageUsed);
-          //  console.log("startDate",startDate);
-          //  console.log("endDate",endDate);
-        } else {
-          // Handle the case where expenses data is null or empty
-          // console.log('No expenses data available');
-          // You might want to set some default values or show an error message to the user
-        }
+      console.log("Total expense for the last 7 days:", totalExpenseLast7Days);
+      setTotalExpense(totalExpenseLast7Days);
+
+      // Calculate percentage used
+      const percentageUsed = (totalExpenseLast7Days / budget) * 100;
+
+      setPercentageUsed(percentageUsed);
 
       })
       .catch((error) => {
@@ -79,13 +74,13 @@ export default function DoughnutChart() {
     return <div>Loading...</div>;
   }
 
-  // Render error message if there's an error
+
   if (error) {
     return <div>Error: {error}</div>;
   }
 
 
-  // Assuming startDate and endDate are in ISO format (e.g., "2023-09-29T07:14:22.167Z")
+
 
   // Parse the ISO dates into JavaScript Date objects
   const startDateTime = new Date(startDate);
@@ -110,12 +105,16 @@ export default function DoughnutChart() {
     entertainment: 0,
   };
 
-  expense.forEach((item) => {
-    const categoryKey = item.categories.toLowerCase(); // Transform to lowercase
-    categoryAmounts[categoryKey] += item.amount; categoryAmounts[item.categories] += item.amount;
-  });
+  if (expense) {
+    expense.forEach((item) => {
+      if (item.categories) {
+        const categoryKey = item.categories.toLowerCase(); // Transform to lowercase
+        categoryAmounts[categoryKey] = (categoryAmounts[categoryKey] || 0) + item.amount;
+      }
+    });
+  }
 
-  console.log("categoryAmounts", categoryAmounts);
+  // console.log("categoryAmounts", categoryAmounts);
 
   const chartData = {
     labels: Object.keys(categoryAmounts),
@@ -172,7 +171,7 @@ export default function DoughnutChart() {
 
                 </div>
               </div>
-              <div style={{ fontSize: "2rem" }}>₹{totalAmountLast7Days}</div>
+              <div style={{ fontSize: "2rem" }}>₹{totalExpense}</div>
             </div>
             <div style={{ fontSize: "1.2rem" }}>
 
@@ -181,7 +180,7 @@ export default function DoughnutChart() {
           </div>
         </div>
       </div>
-      <div className="chart" style={{ height: "510px", width: "100%" }}>
+      <div className="chart" style={{ height: "460px", width: "100%" }}>
         {/* Your content goes here */}
         <Doughnut data={chartData} />
       </div>

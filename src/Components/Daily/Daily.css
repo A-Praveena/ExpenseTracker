@@ -1,0 +1,49 @@
+.daily-expense {
+    display: flex;
+    justify-content: space-around;
+    padding: 5% 0;
+}
+
+.daily-expense-chart {
+    width: 40%;
+}
+
+.total-Amount {
+    display: flex;
+    justify-content: space-around;
+}
+
+.expense-Amount {
+    background-color: #FFA500;
+    padding: 0.5% 3%;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.dailyExpenseCard-Section {
+    margin: 0.5rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    color: #fff;
+    background-color: black;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1.5rem;
+    /* display: flex; */
+    justify-content: space-between;
+
+}
+
+.dailyExpenseCard-Section-doughnut {
+    margin: 0.5rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    color: #fff;
+    background-color: black;
+    border-radius: 1rem;
+    margin: 1.5rem;
+}

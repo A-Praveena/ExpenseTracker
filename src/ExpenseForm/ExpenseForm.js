@@ -1,28 +1,29 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import './expenseform.css';
 import axios from "axios";
 import Swal from "sweetalert2";
+const { DateTime } = require('luxon');
 
 
 
 export default function ExpenseForm() {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState(null); // Initialize date state
-  const [selectedCategory, setSelectedCategory] = useState(null); // Initialize category state
+  const [date, setDate] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const Navigate = useNavigate();
 
   const userId = localStorage.getItem('userId');
   const categories = [
-    {value:"general",label:"General"},
+    { value: "general", label: "General" },
     { value: "food", label: "Food" },
     { value: "transportation", label: "Transportation" },
     { value: "entertainment", label: "Entertainment" },
-    {value:"groceries", label:"Groceries"}
+    { value: "groceries", label: "Groceries" }
   ];
 
   const handleDateChange = (selectedDate) => {
@@ -36,26 +37,26 @@ export default function ExpenseForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const ExpenseData = {
-        amount :amount,
-        description: description,
-        date : date,
-        selectedCategory : selectedCategory.value
+      amount: amount,
+      description: description,
+      date: DateTime.fromJSDate(date, { zone: 'Asia/Kolkata' }).toISO(), // Convert date to ISO 8601 format in a specific timezone
+      selectedCategory: selectedCategory.value
     }
-    // console.log("ExpenseData",ExpenseData);
+    console.log("ExpenseData",ExpenseData);
     axios.post(`http://localhost:3005/expenses/${userId}`, ExpenseData)
-    .then(async (response) => {
-      // console.log(response.data.status);
-      if(response.data.status === "true"){
-        Swal.fire({
-          icon: "success",
-          title: "Expense added successsfully",    
-      }).then(() => {
-        window.location.href = `/Dashboard/${userId}`;
-    });
-      }
-      
-    })
-    
+      .then(async (response) => {
+        // console.log(response.data.status);
+        if (response.data.status === "true") {
+          Swal.fire({
+            icon: "success",
+            title: "Expense added successsfully",
+          }).then(() => {
+            window.location.href = `/Dashboard/${userId}`;
+          });
+        }
+
+      })
+
   };
 
 
@@ -65,17 +66,17 @@ export default function ExpenseForm() {
     option: (provided, state) => ({
       ...provided,
       backgroundColor: "black",
-    //   color:"#fff",
+      //   color:"#fff",
     }),
     control: (provided, state) => ({
       ...provided,
       backgroundColor: "black",
-      color:"#fff",
+      color: "#fff",
     }),
-  singleValue: (provided) => ({
-    ...provided,
-    color: '#FFD700', // Set the text color of the selected value to white
-  }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: '#FFD700',
+    }),
   };
 
   return (
@@ -97,7 +98,7 @@ export default function ExpenseForm() {
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       required
-                    />  
+                    />
                   </div>
                   <div className="expense-form-content">
                     <label>Description</label>
@@ -112,26 +113,26 @@ export default function ExpenseForm() {
                   <div className="expense-form-content">
                     <label>Date</label>
                     <span>
-                    <DatePicker
-                      selected={date}
-                      onChange={handleDateChange}
-                      dateFormat="MM/dd/yyyy"
-                      required
-                    />
+                      <DatePicker
+                        selected={date}
+                        onChange={handleDateChange}
+                        dateFormat="MM/dd/yyyy"
+                        required
+                      />
                     </span>
-                
+
                   </div>
                   <div className="expense-form-content">
                     <label>Category</label>
                     <span>
-                    <Select
-                      options={categories}
-                      value={selectedCategory}
-                      onChange={handleCategoryChange}
-                      isClearable
-                      styles={customStyles} 
-                      required
-                    />
+                      <Select
+                        options={categories}
+                        value={selectedCategory}
+                        onChange={handleCategoryChange}
+                        isClearable
+                        styles={customStyles}
+                        required
+                      />
                     </span>
                   </div>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {fa-regular ,fa-circle-arrow-right } from '@fortawesome/free-solid-svg-icons';
+
 
 
 import Vector from "../assets/Vector.svg";
@@ -17,7 +17,7 @@ import './new.css';
 export default function LandingPage(props) {
     const navigate = useNavigate();
 
-    //   const [isMobile, setIsMobile] = useState(true);
+
 
     return (
         <div>
@@ -38,10 +38,8 @@ export default function LandingPage(props) {
                     <p>Track all your Expenses here...</p>
                     <div>
                         <button className="getStartedButton">
-                        <Link to="/Login" style={{ color: "#000",textDecoration:"none" }}><span>Get Started</span></Link>
-                            {/* <span className="icon">
-                            <FontAwesomeIcon icon="fa-regular fa-circle-arrow-right" />
-                            </span> */}
+                            <Link to="/Login" style={{ color: "#000", textDecoration: "none" }}><span>Get Started</span></Link>
+
                         </button>
                     </div>
                 </div>

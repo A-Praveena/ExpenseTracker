@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import StackedAreas from '../Components/StackedAreas/stackedAreas';
 import DatePicker from "react-datepicker";
 const userId = localStorage.getItem("userId");
+const { DateTime } = require('luxon');
 
 
 export default function AddIncome() {
@@ -15,18 +16,15 @@ export default function AddIncome() {
     const [totalIncome, setTotalIncome] = useState("");
     const [totalExpense, setTotalExpense] = useState("");
 
-    // useEffect(() => {
-    //     console.log("Expense value updated:", totalExpense);
-    //   }, [totalExpense]);
 
     useEffect(() => {
         axios.get(`http://localhost:3005/users/${userId}/income`)
             .then((response) => {
-                // console.log("Income data", response.data.data.data);
 
-                // Get the current date
+                console.log("INCOME",response.data.data.data);
+
                 const currentDate = new Date();
-                const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-based
+                const currentMonth = currentDate.getMonth() + 1;
 
                 // Filter income entries for the current month
                 const currentMonthIncome = response.data.data.data.filter(entry => {
@@ -34,6 +32,7 @@ export default function AddIncome() {
                     const entryMonth = entryDate.getMonth() + 1;
                     return entryMonth === currentMonth;
                 });
+
 
                 // Calculate total income for the current month
                 const calculatedTotalIncome = currentMonthIncome.reduce((total, entry) => {
@@ -43,7 +42,7 @@ export default function AddIncome() {
                 setTotalIncome(calculatedTotalIncome);
 
                 // console.log("Total income for the current month:", totalIncome);
-                
+
 
             })
             .catch((error) => {
@@ -59,13 +58,13 @@ export default function AddIncome() {
                 const currentDate = new Date();
                 const currentMonth = currentDate.getMonth() + 1; // JavaScript months are 0-based
                 // console.log("Current month", currentMonth);
-                // Filter expense entries for the current month
+
                 const currentMonthExpense = response.data.data.data.filter(entry => {
                     const entryDate = new Date(entry.createdAt);
                     const entryMonth = entryDate.getMonth() + 1;
                     return entryMonth === currentMonth;
                 });
-                // Calculate total expense for the current month
+
                 const calculatedTotalExpense = currentMonthExpense.reduce((total, entry) => {
                     return total + entry.amount;
                 }, 0);
@@ -79,34 +78,57 @@ export default function AddIncome() {
                 console.error('Error fetching expense data:', error);
             });
     }, [])
+
     const handleDateChange = (selectedDate) => {
         setDate(selectedDate);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const incomeData = {
             income: amount,
-            date: date,
-        }
-        // console.log("IncomeData", incomeData);
+            date: DateTime.fromJSDate(date, { zone: 'Asia/Kolkata' }).toISO(), // Convert date to ISO 8601 format in a specific timezone
+        };
+
+
         axios.post(`http://localhost:3005/users/${userId}/income`, incomeData)
             .then(async (response) => {
-                // console.log(response.data.status);
                 if (response.data.status === "true") {
                     Swal.fire({
                         icon: "success",
-                        title: "Income added successsfully",
-
+                        title: "Income added successfully",
                     });
+                    // Fetch updated income data after adding income
+                    await axios.get(`http://localhost:3005/users/${userId}/income`)
+                        .then((response) => {
+                            // Calculate total income for the current month
+                            const currentMonthIncome = response.data.data.data.filter(entry => {
+                                const entryDate = new Date(entry.createdAt);
+                                const entryMonth = entryDate.getMonth() + 1;
+                                return entryMonth === new Date().getMonth() + 1;
+                            });
+
+                            const calculatedTotalIncome = currentMonthIncome.reduce((total, entry) => {
+                                return total + entry.income;
+                            }, 0);
+
+                            // Update the totalIncome state with the new calculated total income
+                            setTotalIncome(calculatedTotalIncome);
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching income data:', error);
+                        });
+
                     // Reset form values to their initial state
-                    setAmount(''); // Set amount to an empty string
+                    setAmount('');
                     setDate('');
                 }
             })
-
+            .catch(error => {
+                console.error('Error adding income:', error);
+            });
     };
+
 
     return (
 

@@ -5,59 +5,45 @@ const userId = localStorage.getItem("userId");
 
 export default function StackedAreas() {
   const chartRef = useRef(null);
-  const chartInstance = useRef(null); // Ref to keep track of the chart instance
+  const chartInstance = useRef(null);
   const [incomeData, setIncomeData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:3005/users/${userId}/income`)
-      .then((response) => {
-        const responseData = response.data.data.data;
-
-    if (responseData && Array.isArray(responseData) && responseData.length > 0) {
-      
-      const income = responseData.map(item => item.income);
-      setIncomeData(income);
-    } else {
-      console.log("Invalid API Response Format or Empty Data Array");
-      
-    }
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-
-    axios.get(`http://localhost:3005/expenses/${userId}`)
-      .then((response) => {
-
-        const expenseResponseData = response.data.data.data;
-       
-    if (expenseResponseData && Array.isArray(expenseResponseData) && expenseResponseData.length > 0) {
-       
-      const income = expenseResponseData.map(item => item.income);
-      setIncomeData(income);
-
-      // Calculate month-wise total expense
-      const monthWiseTotalExpense = expenseResponseData.reduce((accumulator, currentItem) => {
-        const expenseMonth = new Date(currentItem.createdAt).getMonth();
-        accumulator[expenseMonth] = (accumulator[expenseMonth] || 0) + currentItem.income;
-        return accumulator;
-      }, {});
-
-      console.log("Month-wise Total Expense", monthWiseTotalExpense);
-         
-    } else {
-      console.log("Invalid API Response Format or Empty Data Array");
-      
-    }
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const incomeResponse = await axios.get(`http://localhost:3005/users/${userId}/income`);
+        const expenseResponse = await axios.get(`http://localhost:3005/expenses/${userId}`);
+  
+        const incomeData = incomeResponse.data.data.data;
+        const expenseData = expenseResponse.data.data.data;
+  
+        // Organize income data by month
+        const incomeByMonth = new Array(12).fill(0);
+        incomeData.forEach((income) => {
+          const month = new Date(income.createdAt).getMonth(); // Get month (0-indexed)
+          incomeByMonth[month] += income.income;
+        });
+  
+        // Organize expense data by month
+        const expenseByMonth = new Array(12).fill(0);
+        expenseData.forEach((expense) => {
+          const month = new Date(expense.createdAt).getMonth(); // Get month (0-indexed)
+          expenseByMonth[month] += expense.amount;
+        });
+  
+        setIncomeData(incomeByMonth);
+        setExpenseData(expenseByMonth);
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+  
+    fetchData();
   }, [userId]);
+  
 
   useEffect(() => {
-    // Check if the chart instance exists and destroy it before creating a new one
     if (chartInstance.current) {
       chartInstance.current.destroy();
     }
@@ -65,7 +51,7 @@ export default function StackedAreas() {
     const options = {
       scales: {
         y: {
-          type: 'linear', // Specify the scale type as 'linear'
+          type: 'linear',
           beginAtZero: true,
           min: 0,
           max: 1000,
@@ -77,12 +63,12 @@ export default function StackedAreas() {
         },
       },
     };
-    
+
     const ctx = chartRef.current.getContext('2d');
     chartInstance.current = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['January', 'February', 'March', 'April', 'May','June','July','August','September','October'],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November','December'],
         datasets: [
           {
             label: 'Income',
@@ -98,19 +84,17 @@ export default function StackedAreas() {
             borderWidth: 1,
             fill: false,
           },
-          // Add more datasets for additional series
         ],
       },
       options: options,
     });
 
-    // Cleanup: destroy the chart when the component unmounts
-   return () => {
+    return () => {
       if (chartInstance.current) {
         chartInstance.current.destroy();
       }
     };
-  }, [incomeData, expenseData]); // Empty dependency array ensures the effect runs once after the initial render
+  }, [incomeData, expenseData]);
 
   return (
     <div>

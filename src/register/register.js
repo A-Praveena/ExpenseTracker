@@ -127,7 +127,7 @@ export default function Register() {
                                             <input type="phone" {...register("phone", {
                                                 required: "*Phone No is required",
                                                 pattern: {
-                                                    value: /^[0-9]{10}$/, // Adjust the regular expression for your specific phone number format
+                                                    value: /^[0-9]{10}$/, 
                                                     message: "Invalid phone number format"
                                                 }
                                             })} className="input-field" maxLength={10} />

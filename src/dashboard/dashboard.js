@@ -7,42 +7,58 @@ import HomeDashboard from "../HomeDashboard/Homedashboard";
 import AddIncome from "../addincome/addincome";
 import EditProfile from "../editProfile/editProfile";
 import Daily from "../Components/Daily/Daily";
+import PasswordChange from "../Password/password";
+import Analysis from "../Analysis/Analysis";
+
 
 export default function Dashboard() {
 
     const [showExpenseForm, setShowExpenseForm] = useState(false);
     const [showHomeDashboard, setShowHomeDashboard] = useState(true);
     const [showIncomeForm, setshowIncomeForm] = useState(false);
-    const [showEditProfileForm,setshowEditProfileForm] = useState(false);
-    const [showDailyForm,setshowDailyForm] = useState(false);
+    const [showEditProfileForm, setshowEditProfileForm] = useState(false);
+    const [showDailyForm, setshowDailyForm] = useState(false);
+    const [showPasswordChange, setshowPasswordChange] = useState(false);
+    const [showAnalysis, setshowAnalyis] = useState(false);
     const [isActive, setIsActive] = useState(false);
+    const userName = localStorage.getItem("userName");
 
     const handleDropdownClick = () => {
-      setIsActive(!isActive);
+        setIsActive(!isActive);
     };
-    const userId = localStorage.getItem("userId")
+    const userId = localStorage.getItem("userId");
+
+
     const toggleExpenseForm = () => {
         setShowExpenseForm(!showExpenseForm);
-        setShowHomeDashboard(false); // Hide HomeDashboard when ExpenseForm is visible
+        setShowHomeDashboard(false);
         setshowIncomeForm(false);
         setshowEditProfileForm(false);
+        setshowPasswordChange(false);
+        setshowDailyForm(false);
+        setshowAnalyis(false);
     };
 
 
     const toggleHomeDashboard = () => {
-        setShowHomeDashboard(true); // Show HomeDashboard when Home button is clicked
-        setShowExpenseForm(false); // Hide ExpenseForm when HomeDashboard is visible
+        setShowHomeDashboard(true);
+        setShowExpenseForm(false);
         setshowIncomeForm(false);
         setshowEditProfileForm(false);
+        setshowPasswordChange(false);
+        setshowDailyForm(false);
+        setshowAnalyis(false);
     };
 
     const toggleEditProfile = () => {
         setshowEditProfileForm(true);
-        setShowHomeDashboard(false); 
+        setShowHomeDashboard(false);
         setshowIncomeForm(false);
         setShowExpenseForm(false);
         setshowDailyForm(false);
-
+        setshowPasswordChange(false);
+        setshowDailyForm(false);
+        setshowAnalyis(false);
     }
 
     const toggleIncomeForm = () => {
@@ -51,25 +67,49 @@ export default function Dashboard() {
         setShowHomeDashboard(false);
         setshowEditProfileForm(false);
         setshowDailyForm(false);
-
+        setshowPasswordChange(false);
+        setshowAnalyis(false);
     };
 
     const toggleProfileForm = () => {
-        setShowHomeDashboard(true); // Show HomeDashboard when Home button is clicked
-        setShowExpenseForm(false); // Hide ExpenseForm when HomeDashboard is visible
+        setShowHomeDashboard(true);
+        setShowExpenseForm(false);
         setshowIncomeForm(false);
         setshowEditProfileForm(false);
         setshowDailyForm(false);
+        setshowPasswordChange(false);
+        setshowAnalyis(false);
     };
 
     const toggleDailyForm = () => {
         setshowDailyForm(true);
-        setShowHomeDashboard(false); // Show HomeDashboard when Home button is clicked
-        setShowExpenseForm(false); // Hide ExpenseForm when HomeDashboard is visible
+        setShowHomeDashboard(false);
+        setShowExpenseForm(false);
         setshowIncomeForm(false);
         setshowEditProfileForm(false);
-        
+        setshowPasswordChange(false);
+        setshowAnalyis(false);
     };
+
+    const toggleChangePasswordForm = () => {
+        setshowDailyForm(false);
+        setShowHomeDashboard(false);
+        setShowExpenseForm(false);
+        setshowIncomeForm(false);
+        setshowEditProfileForm(false);
+        setshowPasswordChange(true);
+        setshowAnalyis(false);
+    }
+
+    const toggleAnalysisForm = () => {
+        setshowAnalyis(true);
+        setShowExpenseForm(false);
+        setShowHomeDashboard(false);
+        setshowIncomeForm(false);
+        setshowEditProfileForm(false);
+        setshowPasswordChange(false);
+        setshowDailyForm(false);
+    }
 
     return (
         <div>
@@ -103,7 +143,7 @@ export default function Dashboard() {
                                     >
                                         <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                                     </svg>
-                                    <a href="/dashboard" class="menu-link">Analysis</a>
+                                    <a class="menu-link" onClick={toggleAnalysisForm}>Analysis</a>
                                 </li>
                                 <li class="menu-item">
                                     <svg
@@ -125,28 +165,28 @@ export default function Dashboard() {
 
                                 <ul class="menu-list">
                                     <li class="menu-item" onclick="toggleProfileForm()">
-                                        
+
                                         <div >
-                                        <div className="dropdown-container">
-                                            
-                                            <svg class="h-7 w-7 text-yellow-500" viewBox="0 0 20 20" fill="currentColor" width="30" height="30">
-                                                <path fill-rule="evenodd" d="M10 2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM10 0a4 4 0 100 8 4 4 0 000-8zM2 18a1 1 0 011-1h14a1 1 0 011 1v1H2v-1z" clip-rule="evenodd" />
-                                            </svg>
-                                            <button className={`profile-btn ${isActive ? 'active' : ''}`} onClick={handleDropdownClick}>
-                                                Profile
-                                            </button>
-                                            {isActive && (
-                                                <div className="profile-contents">
-                                                <a onClick={toggleEditProfile}>Edit profile</a>
-                                                <a>Change Password</a>
-                                                </div>
-                                            )}
+                                            <div className="dropdown-container">
+
+                                                <svg class="h-7 w-7 text-yellow-500" viewBox="0 0 20 20" fill="currentColor" width="30" height="30">
+                                                    <path fill-rule="evenodd" d="M10 2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM10 0a4 4 0 100 8 4 4 0 000-8zM2 18a1 1 0 011-1h14a1 1 0 011 1v1H2v-1z" clip-rule="evenodd" />
+                                                </svg>
+                                                <button className={`profile-btn ${isActive ? 'active' : ''}`} onClick={handleDropdownClick}>
+                                                    Profile
+                                                </button>
+                                                {isActive && (
+                                                    <div className="profile-contents">
+                                                        <a onClick={toggleEditProfile}>Edit profile</a>
+                                                        <a onClick={toggleChangePasswordForm}>Change Password</a>
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
-                                        </div>
-                                            
+
                                     </li>
                                 </ul>
-                                </ul>
+                            </ul>
 
                         </div>
 
@@ -189,8 +229,10 @@ export default function Dashboard() {
                         {showHomeDashboard && <HomeDashboard />}
                         {showExpenseForm && <ExpenseForm userId={userId} />}
                         {showIncomeForm && <AddIncome userId={userId} />}
-                        {showEditProfileForm && <EditProfile userId={userId}/>}
-                        {showDailyForm && <Daily userId ={userId}/>}
+                        {showEditProfileForm && <EditProfile userId={userId} />}
+                        {showDailyForm && <Daily userId={userId} />}
+                        {showPasswordChange && <PasswordChange userId={userId} />}
+                        {showAnalysis && <Analysis userId={userId} />}
                     </div>
                 </div>
             </div>
