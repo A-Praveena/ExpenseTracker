@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { faGripLines } from '@fortawesome/free-solid-svg-icons';
 import { Doughnut } from 'react-chartjs-2';
-import money from '../../assets/money.png';
 import '../ExpenseCard/ExpenseCard.css';
 import axios from 'axios';
 import { BiSignal4 } from "react-icons/bi";
@@ -33,34 +31,36 @@ export default function DoughnutChart() {
     const budget = 5000; // Replace this with your predefined budget value
     axios.get(`http://localhost:3005/expenses/${userId}`)
       .then((response) => {
-        console.log("Doughnut;;;;;",response.data.data.data);
+        console.log("Doughnut;;;;;", response.data.data.data);
         setExpense(response.data.data.data);
-       
+
         const currentDate = new Date();
-      // Calculate the date 7 days ago
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(currentDate.getDate() - 7);
-       // Filter the expenses for the last 7 days
-       const expensesLast7Days = response.data.data.data.filter((expense) => {
-        const expenseDate = new Date(expense.createdAt);
-        return expenseDate >= sevenDaysAgo && expenseDate <= currentDate;
-      });
+        // Calculate the date 7 days ago
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(currentDate.getDate() - 7);
+        // Filter the expenses for the last 7 days
+        const expensesLast7Days = response.data.data.data.filter((expense) => {
+          const expenseDate = new Date(expense.createdAt);
+          return expenseDate >= sevenDaysAgo && expenseDate <= currentDate;
+        });
 
-      console.log("Expenses for the last 7 days:", expensesLast7Days);
-      setExpense(expensesLast7Days);
+        console.log("Expenses for the last 7 days:", expensesLast7Days);
+        setExpense(expensesLast7Days);
 
-      // Calculate total expense for the last 7 days
-      const totalExpenseLast7Days = expensesLast7Days.reduce((total, expense) => {
-        return total + expense.amount;
-      }, 0);
+        // Calculate total expense for the last 7 days
+        const totalExpenseLast7Days = expensesLast7Days.reduce((total, expense) => {
+          return total + expense.amount;
+        }, 0);
 
-      console.log("Total expense for the last 7 days:", totalExpenseLast7Days);
-      setTotalExpense(totalExpenseLast7Days);
+        console.log("Total expense for the last 7 days:", totalExpenseLast7Days);
+        setTotalExpense(totalExpenseLast7Days);
 
-      // Calculate percentage used
-      const percentageUsed = (totalExpenseLast7Days / budget) * 100;
+        // Calculate percentage used
+        // Calculate percentage used
+        const percentageUsed = ((totalExpenseLast7Days / budget) * 100).toFixed(0); // Rounded to 0 decimal places
 
-      setPercentageUsed(percentageUsed);
+        setPercentageUsed(percentageUsed);
+
 
       })
       .catch((error) => {

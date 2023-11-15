@@ -19,6 +19,9 @@ import Daily from './Components/Daily/Daily';
 import PasswordChange from './Password/password';
 import Analysis from './Analysis/Analysis';
 import EditExpenseModal from './editModal/EditModal';
+import NotFound from './Notfound/Notfound';
+import PrivateRoute from './ProtectedRoute/PrivateRoute';
+
 
 
 function App() {
@@ -31,6 +34,11 @@ function App() {
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/Register" element={<Register />}></Route>
+        
+
+        <Route element={<PrivateRoute/>}>
+
+        
         <Route path="/Dashboard/:userId" element={<Dashboard />}></Route>
         <Route path="/ExpenseForm/:userId" element={<ExpenseForm />}></Route>
         <Route path="/AboutUs" element={<AboutUs />}></Route>
@@ -46,6 +54,13 @@ function App() {
         <Route path='/PasswordChange:userId' element={<PasswordChange />}></Route>
         <Route path='/Analysis:userId' element={<Analysis />}></Route>
         <Route path='/EditExpenseModal:userId' element={<EditExpenseModal />}></Route>
+
+
+
+
+          </Route>
+        <Route path='*' element={<NotFound/>}></Route>
+
       </Routes>
     </BrowserRouter>
   );

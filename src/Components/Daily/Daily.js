@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import DoughnutChart from "../Doughnut/Doughnut";
 import money from '../../assets/money.png';
 import Swal from 'sweetalert2';
 import { AiFillEdit } from "react-icons/ai";

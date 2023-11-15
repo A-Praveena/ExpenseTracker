@@ -120,6 +120,7 @@ export default function Dashboard() {
                             <h1 class="logo">Expense Tracker</h1>
                             <ul class="menu-list">
                                 <li class="menu-item">
+                                    {/* SVG icon for Home */}
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="h-7 w-7"
@@ -128,10 +129,13 @@ export default function Dashboard() {
                                         width="30"
                                         height="30"
                                     >
+                                        {/* Path defining the shape of the Home icon */}
                                         <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                                     </svg>
+                                    {/* Anchor tag for Home with click event to toggle home dashboard */}
                                     <a class="menu-link" onClick={toggleHomeDashboard}>Home</a>
                                 </li>
+
                                 <li class="menu-item">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -145,6 +149,8 @@ export default function Dashboard() {
                                     </svg>
                                     <a class="menu-link" onClick={toggleAnalysisForm}>Analysis</a>
                                 </li>
+
+                                
                                 <li class="menu-item">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +199,9 @@ export default function Dashboard() {
 
 
                         <div style={{ marginTop: "100%" }}>
+
                             <div class="button-container">
+                                 {/* Button for adding income */}
                                 <button class="add-expense" onClick={toggleIncomeForm}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13v3H8v2h3v3h2v-3h3v-2h-3V7h-2z" />
@@ -203,6 +211,7 @@ export default function Dashboard() {
                             </div>
 
                             <div class="button-container">
+                                 {/* Button for adding expenses */}
                                 <button class="add-expense" onClick={toggleExpenseForm}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
                                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13v3H8v2h3v3h2v-3h3v-2h-3V7h-2z" />
@@ -211,8 +220,14 @@ export default function Dashboard() {
                                 </button>
                             </div>
 
+
                             <div class="button-container">
-                                <button class="logout">
+                                {/* Logout button with SVG icon */}
+                                <button class="logout"
+                                    onClick={() => {
+                                        // Clear local storage on button click (assuming it's for logout)
+                                        localStorage.clear()
+                                    }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
                                         <path d="M0 0h24v24H0z" fill="none" />
                                         <path d="M14 5l-1.41 1.41L16.17 11H4v2h12.17l-3.58 3.59L14 19l6-6z" />
@@ -225,7 +240,6 @@ export default function Dashboard() {
 
                     </div>
                     <div class="col-right">
-                        {/* <!-- Content goes here --> */}
                         {showHomeDashboard && <HomeDashboard />}
                         {showExpenseForm && <ExpenseForm userId={userId} />}
                         {showIncomeForm && <AddIncome userId={userId} />}

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from "react-hook-form";
 import axios from 'axios';
-import './editModal.css'
-import { format } from 'date-fns';
+import './editModal.css';
 import Swal from 'sweetalert2';
 
 const userId = localStorage.getItem("userId");

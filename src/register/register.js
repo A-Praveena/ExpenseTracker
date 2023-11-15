@@ -32,14 +32,12 @@ export default function Register() {
                         title: "Registation completed",
                         text: "hurray!!!!!!!!!",
                     })
-                    // window.location.href="/Register"
                     document.getElementById("register-form").reset();
                 }
 
             })
             .catch(async (err) => {
                 // console.log("error", err.response.data.message);
-                // auth = false
                 localStorage.setItem('auth', JSON.stringify(false))
 
                 Swal.fire({
@@ -220,22 +218,10 @@ export default function Register() {
                                     </div>
                                 </form>
                             </div>
-
-
-
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
-
-
-
     )
 }

@@ -20,10 +20,7 @@ export default function Login() {
         axios.post("http://localhost:3005/tokens", userData)
             .then(async (response) => {
                 // console.log("Succesfully logged in",response)
-                // console.log("Response received from the backend:", response.data); // Add this line
-                // console.log("response message", response.data.message);
-                // console.log("response data", response.data.user.username);
-                // console.log("response data", response.data.status);
+
 
 
                 if (response.data.status === true) {
@@ -79,9 +76,6 @@ export default function Login() {
                                     <div className="login-form-content">
                                         <label>User Name</label>
                                         <input type="text" {...register("username", { required: true })} placeholder='Username' />
-                                        {/* <div className='errors'>
-                                            {errors.username?.type === "required" && "*Username is required"}
-                                        </div> */}
                                     </div>
                                     <div className='login-errors'>
                                         {errors.username?.type === "required" && "*Username is required"}
@@ -89,9 +83,6 @@ export default function Login() {
                                     <div className="login-form-content">
                                         <label>Password</label>
                                         <input type="password" {...register("password", { required: true })} placeholder='Password' />
-                                        {/* <div className='errors'>
-                                            {errors.password?.type === "required" && "*Password is required"}
-                                        </div> */}
                                     </div>
                                     <div className='login-errors'>
                                         {errors.password?.type === "required" && "*Password is required"}
@@ -99,7 +90,6 @@ export default function Login() {
 
                                     <button className='login-btn' >Submit</button>
                                     <div className="login-form-forgot">
-                                        {/* <span>Forgot password?</span> */}
 
                                         <div>
                                             <span>Don't have an account, <span><Link to="/Register" style={{ color: "#ffdf1a" }} >Sign Up</Link></span></span>

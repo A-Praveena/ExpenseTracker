@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { CCard, CCardBody } from '@coreui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { AiOutlineDelete } from "react-icons/ai";
 import money from '../../assets/money.png';
 import '../ExpenseCard/ExpenseCard.css';
 import Swal from 'sweetalert2';
 import { AiFillEdit } from "react-icons/ai";
-import { icon, text } from '@fortawesome/fontawesome-svg-core';
 import EditExpenseModal from '../../editModal/EditModal';
 const userId = localStorage.getItem("userId");
 
